@@ -21,6 +21,7 @@
         <h1>ncnn webassembly scrfd</h1>
         <div>
             <button disabled id="switch-camera-btn" style="height:48px">Switch Camera</button>
+            <button id="register-btn" style="height: 48px">Register</button>
         </div>
         <div>
             <canvas id="canvas" width="640"></canvas>
@@ -103,9 +104,11 @@
         var dst = null;
         var resultarray = null;
         var resultbuffer = null;
+        var register = false;
         window.addEventListener('DOMContentLoaded', function() {
             var isStreaming = false;
             switchcamerabtn = document.getElementById('switch-camera-btn');
+            registerbtn = document.getElementById('register-btn');
             video = document.getElementById('video');
             canvas = document.getElementById('canvas');
             ctx = canvas.getContext('2d');
@@ -166,6 +169,17 @@
                 capture();
             });
 
+            registerbtn.addEventListener('mousedown', function (){
+                if (stream == null)
+                    return
+                register = true
+            });
+            registerbtn.addEventListener('mouseup', function (){
+                if (stream == null)
+                    return
+                register = false
+            });
+
             capture();
         });
 
@@ -186,7 +200,7 @@
         }
 
 
-        function ncnn_scrfd() {
+        function ncnn_scrfd(register) {
             var canvas = document.getElementById('canvas');
             var ctx = canvas.getContext('2d');
 
@@ -195,7 +209,7 @@
 
             HEAPU8.set(data, dst);
 
-            _scrfd_ncnn(dst, canvas.width, canvas.height);
+            _scrfd_ncnn(dst, canvas.width, canvas.height, register);
 
             var result = HEAPU8.subarray(dst, dst + data.length);
             imageData.data.set(result);
@@ -209,7 +223,7 @@
             ctx.fillRect(0, 0, w, h);
             ctx.drawImage(video, 0, 0, w, h);
 
-            ncnn_scrfd();
+            ncnn_scrfd(register);
 
             window.requestAnimationFrame(sFilter);
         }
