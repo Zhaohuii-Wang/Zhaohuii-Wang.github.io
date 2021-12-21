@@ -233,6 +233,7 @@
             //console.log(register, name);
             //var cstr = allocate(intArrayFromString(name), 'i8', ALLOC_NORMAL);
             var cstr = allocate(intArrayFromString(name), 'i8', 0);
+            console.log(register, cstr);
             ncnn_scrfd(register, cstr);
             _free(cstr);
             register = false;
