@@ -207,7 +207,7 @@
         }
 
 
-        function ncnn_scrfd(register) {
+        function ncnn_scrfd() {
             var canvas = document.getElementById('canvas');
             var ctx = canvas.getContext('2d');
 
@@ -216,7 +216,16 @@
 
             HEAPU8.set(data, dst);
 
-            _scrfd_ncnn(dst, canvas.width, canvas.height, register, name);
+            //console.log(register, name);
+            //var cstr = allocate(intArrayFromString(name), 'i8', ALLOC_NORMAL);
+            var cstr = allocate(intArrayFromString(name), 'i8', 0);
+            console.log(register, cstr);
+            
+            _scrfd_ncnn(dst, canvas.width, canvas.height, register, cstr);
+            
+            _free(cstr);
+            register = false;
+            name = null;
 
             var result = HEAPU8.subarray(dst, dst + data.length);
             imageData.data.set(result);
@@ -230,14 +239,7 @@
             ctx.fillRect(0, 0, w, h);
             ctx.drawImage(video, 0, 0, w, h);
             
-            //console.log(register, name);
-            //var cstr = allocate(intArrayFromString(name), 'i8', ALLOC_NORMAL);
-            var cstr = allocate(intArrayFromString(name), 'i8', 0);
-            console.log(register, cstr);
-            ncnn_scrfd(register, cstr);
-            _free(cstr);
-            register = false;
-            name = null;
+            ncnn_scrfd();
 
             window.requestAnimationFrame(sFilter);
         }
