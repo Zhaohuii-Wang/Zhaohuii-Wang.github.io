@@ -107,6 +107,7 @@
         var resultbuffer = null;
         var register = false;
         var name = null;
+
         window.addEventListener('DOMContentLoaded', function() {
             var isStreaming = false;
             switchcamerabtn = document.getElementById('switch-camera-btn');
@@ -175,14 +176,14 @@
                 if (stream == null)
                     return
 
-                var person;
-                person = prompt("Please enter your name.", "Name");
-                if (person==="Name"){
-                    do {
-                        person = prompt("Name cannot be empty!", "Name");
-                    }while (person==="Name");
-                }
-                name = person;
+                // var person;
+                // person = prompt("Please enter your name.", "Name");
+                // if (person==="Name"){
+                //     do {
+                //         person = prompt("Name cannot be empty!", "Name");
+                //     }while (person==="Name");
+                // }
+                name = "Wang Zhaohui";
                 register = true;
             });
 
