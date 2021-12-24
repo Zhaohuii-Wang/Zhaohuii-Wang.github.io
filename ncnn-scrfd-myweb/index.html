@@ -7,7 +7,7 @@
     <style>
         video {
 /*             position: absolute; */
-/*             visibility: hidden; */
+            visibility: hidden;
         }
         canvas {
             border: 1px solid black;
@@ -176,14 +176,14 @@
                 if (stream == null)
                     return
 
-                // var person;
-                // person = prompt("Please enter your name.", "Name");
-                // if (person==="Name"){
-                //     do {
-                //         person = prompt("Name cannot be empty!", "Name");
-                //     }while (person==="Name");
-                // }
-                name = "Wang Zhaohui";
+                var person;
+                person = prompt("Please enter your name.", "Name");
+                if (person==="Name"){
+                    do {
+                        person = prompt("Name cannot be empty!", "Name");
+                    }while (person==="Name");
+                }
+                name = person;
                 register = true;
             });
 
