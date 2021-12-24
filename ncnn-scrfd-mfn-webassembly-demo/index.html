@@ -216,10 +216,7 @@
 
             HEAPU8.set(data, dst);
 
-            //console.log(register, name);
-            //var cstr = allocate(intArrayFromString(name), 'i8', ALLOC_NORMAL);
             var cstr = allocate(intArrayFromString(name), 'i8', 0);
-            console.log(register, cstr);
             
             _scrfd_ncnn(dst, canvas.width, canvas.height, register, cstr);
             
